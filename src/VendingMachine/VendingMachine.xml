@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VendingMachine</name>
+    </assembly>
+    <members>
+        <member name="M:VendingMachine.Controllers.ProductsController.Get">
+            <summary>
+            Gets a list of all the stock products.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VendingMachine.Controllers.ProductsController.Take(System.Int32)">
+            <summary>
+            Takes on unit of a given product. I also validates if the product is available and if the user amount is enough.
+            </summary>
+            <param name="id">Id of the product</param>
+            <returns></returns>
+        </member>
+        <member name="M:VendingMachine.Controllers.WalletController.Get">
+            <summary>
+            Gets the current amount in the user's wallet.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VendingMachine.Controllers.WalletController.Post(System.Decimal)">
+            <summary>
+            Adds a coin of the given value to the user's wallet.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VendingMachine.Controllers.WalletController.Delete">
+            <summary>
+            Removes and returns all the coins in the user's wallet.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VendingMachine.Extensions.AddServiceExtensions.AddSingletonServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the Singleton needed services that hold the data.
+            </summary>
+            <param name="services"></param>
+        </member>
+    </members>
+</doc>
