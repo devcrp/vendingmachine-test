@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VendingMachine.Core.Options;
-using VendingMachine.Domain.Exceptions;
+using VendingMachine.Core.Exceptions;
 using VendingMachine.Domain.Interfaces;
 
 namespace VendingMachine.Core.Base

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using VendingMachine.Core;
-using VendingMachine.Domain.Exceptions;
+using VendingMachine.Core.Exceptions;
 using VendingMachine.Domain.Interfaces;
 using VendingMachine.Domain.Models;
 

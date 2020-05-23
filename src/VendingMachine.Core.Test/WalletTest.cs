@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using VendingMachine.Core.Base;
-using VendingMachine.Domain.Exceptions;
+using VendingMachine.Core.Exceptions;
 
 namespace VendingMachine.Core.Test
 {
