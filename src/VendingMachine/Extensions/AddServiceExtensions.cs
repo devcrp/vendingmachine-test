@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using VendingMachine.Core;
-using VendingMachine.Core.Options;
-using VendingMachine.Domain.Interfaces;
-using VendingMachine.Domain.Models;
+using VendingMachine.Core.Interfaces;
+using VendingMachine.Domain.ValueObjects;
+using VendingMachine.Domain.ValueObjects.Options;
+using VendingMachine.Persistence;
 
 namespace VendingMachine.Extensions
 {
@@ -16,15 +17,21 @@ namespace VendingMachine.Extensions
         /// <param name="services"></param>
         public static void AddSingletonServices(this IServiceCollection services)
         {
-            services.AddSingleton<WalletDefaultOptions>(s => GetWalletDefaultOptions());
-            services.AddSingleton<ProductDefaultOptions>(s => GetProductDefaultOptions());
+            services.AddSingleton<IProductsRepository, ProductsRepository>();
 
             services.AddSingleton<UserWalletService>();
             services.AddSingleton<MachineWalletService>();
-            services.AddSingleton<IProductsService, ProductsService>();
+            services.AddSingleton<ProductsService>();
+
+            services.AddSingleton<UserWallet>();
+            services.AddSingleton<MachineWallet>(s => new MachineWallet().Options(o =>
+            {
+                o.Coins = GetMachineInitialCoins();
+            }));
+
         }
 
-        private static WalletDefaultOptions GetWalletDefaultOptions()
+        private static List<decimal> GetMachineInitialCoins()
         {
             List<decimal> coins = new List<decimal>();
 
@@ -33,25 +40,7 @@ namespace VendingMachine.Extensions
             Enumerable.Range(1, 100).ToList().ForEach(i => coins.Add(0.50m));
             Enumerable.Range(1, 100).ToList().ForEach(i => coins.Add(1));
 
-            return new WalletDefaultOptions()
-            {
-                Coins = coins
-            };
-        }
-
-        private static ProductDefaultOptions GetProductDefaultOptions()
-        {
-            List<Product> products = new List<Product>();
-
-            products.Add(new Product(1, "Tea", 1.30m, 10));
-            products.Add(new Product(2, "Espresso", 1.80m, 20));
-            products.Add(new Product(3, "Juice", 1.80m, 20));
-            products.Add(new Product(4, "Chicken soup", 1.80m, 15));
-
-            return new ProductDefaultOptions
-            {
-                Products = products
-            };
+            return coins;
         }
     }
 }

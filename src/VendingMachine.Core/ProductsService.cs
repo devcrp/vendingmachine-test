@@ -1,20 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VendingMachine.Core.Options;
-using VendingMachine.Core.Exceptions;
-using VendingMachine.Domain.Interfaces;
-using VendingMachine.Domain.Models;
+using VendingMachine.Core.Interfaces;
+using VendingMachine.Domain.Entities;
+using VendingMachine.Domain.Exceptions;
 
 namespace VendingMachine.Core
 {
-    public class ProductsService : IProductsService
+    public class ProductsService
     {
+        private readonly IProductsRepository _productsRepository;
         private readonly UserWalletService _userWalletService;
-        private List<Product> _products;
 
-        public ProductsService(ProductDefaultOptions options, UserWalletService userWalletService)
+        public ProductsService(IProductsRepository productsRepository, UserWalletService userWalletService)
         {
-            _products = options.Products;
+            this._productsRepository = productsRepository;
             this._userWalletService = userWalletService;
         }
 
@@ -24,7 +23,7 @@ namespace VendingMachine.Core
         /// <returns></returns>
         public IEnumerable<Product> GetList()
         {
-            return _products;
+            return _productsRepository.GetList();
         }
 
         /// <summary>
@@ -36,17 +35,8 @@ namespace VendingMachine.Core
         /// <returns></returns>
         public decimal Take(int productId, decimal amount)
         {
-            Product product = _products.Single(product => product.Id == productId);
-
-            if (product.Quantity <= 0)
-                throw new ProductNotAllowedException("Product not available.");
-
-            if (product.Price > amount)
-                throw new ProductNotAllowedException($"Insufficient amount. The price for {product.Name} is {product.Price}€");
-
-            product.Quantity--;
-
-            return amount - product.Price;
+            Product product = _productsRepository.GetSingle(productId);
+            return product.TakeOne(amount);
         }
     }
 }

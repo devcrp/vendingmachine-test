@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using VendingMachine.Core;
-using VendingMachine.Core.Exceptions;
-using VendingMachine.Domain.Interfaces;
-using VendingMachine.Domain.Models;
+using VendingMachine.Domain.Entities;
+using VendingMachine.Domain.Exceptions;
 
 namespace VendingMachine.Controllers
 {
@@ -11,11 +10,11 @@ namespace VendingMachine.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductsService _productsService;
+        private readonly ProductsService _productsService;
         private readonly UserWalletService _userWalletService;
         private readonly MachineWalletService _machineWalletService;
 
-        public ProductsController(IProductsService productsService, UserWalletService userWalletService, MachineWalletService machineWalletService)
+        public ProductsController(ProductsService productsService, UserWalletService userWalletService, MachineWalletService machineWalletService)
         {
             this._productsService = productsService;
             this._userWalletService = userWalletService;

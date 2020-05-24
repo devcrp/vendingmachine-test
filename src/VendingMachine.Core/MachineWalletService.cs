@@ -1,17 +1,14 @@
-﻿using VendingMachine.Core.Base;
-using VendingMachine.Core.Options;
-using VendingMachine.Domain.Interfaces;
+﻿
+using VendingMachine.Core.Base;
+using VendingMachine.Domain.ValueObjects;
 
 namespace VendingMachine.Core
 {
-    /// <summary>
-    /// Class to hold the instance for the vending machine wallet. This instance will have a default initial list of coins.
-    /// </summary>
-    public class MachineWalletService : BaseWallet, IWalletService
+    public class MachineWalletService : BaseWalletService
     {
-        public MachineWalletService(WalletDefaultOptions options) : base(options)
+        public MachineWalletService(MachineWallet machineWallet) : base(machineWallet)
         {
-
+            
         }
     }
 }

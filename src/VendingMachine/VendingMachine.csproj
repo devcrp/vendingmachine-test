@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VendingMachine.Core\VendingMachine.Core.csproj" />
+    <ProjectReference Include="..\VendingMachine.Persistence\VendingMachine.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

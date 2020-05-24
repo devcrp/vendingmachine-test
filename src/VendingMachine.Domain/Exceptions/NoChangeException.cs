@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VendingMachine.Core.Exceptions
+namespace VendingMachine.Domain.Exceptions
 {
     public class NoChangeException : Exception
     {
