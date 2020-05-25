@@ -1,9 +1,9 @@
 # Vending Machine Test
 
-### To run it
+### To run it 🚀
 Just set the VendingMachine project as the startup one and run from VS.
 
-### Tech stack
+### Tech stack 💡
 
 **Frontend**
  - ReactJS
@@ -13,10 +13,10 @@ Just set the VendingMachine project as the startup one and run from VS.
  - C#
  - Swagger for API testing and documentation.
 
-### Goal
+### Goal 🎯
 To have a virtual vending machine that would behave like a real one.
 
-### Strategy followed for backend
+### Strategy followed for backend 🗺️
 
 To store the coins in the wallets, I injected singleton services which have the data they need so I don’t have to worry about the state of the coins.
 
@@ -54,7 +54,7 @@ Additionally I added three custom exceptions to handle three validation scenario
     
 3.  **NoChangeExceptions** - will happen if the vending machine has not enough coins to return the change.
 
-### Unit tests
+### Unit tests 🧪
 
 Since both wallets are based on the same base-class, I built two sets of tests:
 
