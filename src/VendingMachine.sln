@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine", "VendingMachine\VendingMachine.csproj", "{277E4D51-83F5-4CE6-8BB2-073E4E008FD0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Core", "VendingMachine.Core\VendingMachine.Core.csproj", "{6CCAE8DA-86DE-4A22-8342-5164998ECFB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Application", "VendingMachine.Application\VendingMachine.Application.csproj", "{6CCAE8DA-86DE-4A22-8342-5164998ECFB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Domain", "VendingMachine.Domain\VendingMachine.Domain.csproj", "{33303A92-9A20-4771-AEC1-0262711D05B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E9FA258E-84F7-4C91-A09A-7C6ED510C4B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Core.Test", "VendingMachine.Core.Test\VendingMachine.Core.Test.csproj", "{945342C6-86C8-4ED5-88E7-9A55730897F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Application.Test", "VendingMachine.Application.Test\VendingMachine.Application.Test.csproj", "{945342C6-86C8-4ED5-88E7-9A55730897F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Persistence", "VendingMachine.Persistence\VendingMachine.Persistence.csproj", "{6169D6AF-0B4E-49EF-8110-8520FB08AC63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Persistence", "VendingMachine.Persistence\VendingMachine.Persistence.csproj", "{6169D6AF-0B4E-49EF-8110-8520FB08AC63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

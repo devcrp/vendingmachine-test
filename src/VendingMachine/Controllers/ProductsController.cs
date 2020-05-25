@@ -43,15 +43,7 @@ namespace VendingMachine.Controllers
         {
             try
             {
-                decimal change = _productsService.Take(id, _userWalletService.GetAmount());
-
-                _userWalletService.GetCoins().ForEach(userCoin => _machineWalletService.AddCoin(userCoin));
-
-                List<decimal> changeCoins = _machineWalletService.RetrieveCoinsFor(change);
-
-                _userWalletService.RemoveAllCoins();
-
-                return changeCoins;
+                return _productsService.Take(id);
             }
             catch (ProductNotAllowedException ex)
             {

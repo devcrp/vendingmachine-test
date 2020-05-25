@@ -3,18 +3,21 @@ using System.Linq;
 using VendingMachine.Core.Interfaces;
 using VendingMachine.Domain.Entities;
 using VendingMachine.Domain.Exceptions;
+using VendingMachine.Domain.ValueObjects;
 
 namespace VendingMachine.Core
 {
     public class ProductsService
     {
         private readonly IProductsRepository _productsRepository;
-        private readonly UserWalletService _userWalletService;
+        private readonly UserWallet _userWallet;
+        private readonly MachineWallet _machineWallet;
 
-        public ProductsService(IProductsRepository productsRepository, UserWalletService userWalletService)
+        public ProductsService(IProductsRepository productsRepository, UserWallet userWallet, MachineWallet machineWallet)
         {
             this._productsRepository = productsRepository;
-            this._userWalletService = userWalletService;
+            this._userWallet = userWallet;
+            this._machineWallet = machineWallet;
         }
 
         /// <summary>
@@ -33,10 +36,19 @@ namespace VendingMachine.Core
         /// <param name="productId"></param>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public decimal Take(int productId, decimal amount)
+        public List<decimal> Take(int productId)
         {
             Product product = _productsRepository.GetSingle(productId);
-            return product.TakeOne(amount);
+            decimal change = product.TakeOne(_userWallet.GetAmount());
+
+            // Add user's coins into the machine wallet.
+            _userWallet.Coins.ForEach(userCoin => _machineWallet.AddCoin(userCoin));
+
+            List<decimal> changeCoins = _machineWallet.RetrieveCoinsFor(change);
+
+            _userWallet.RemoveAllCoins();
+
+            return changeCoins;
         }
     }
 }

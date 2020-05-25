@@ -1,19 +1,20 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using VendingMachine.Application.Test.ValueObjects;
 using VendingMachine.Core.Base;
-using VendingMachine.Core.Exceptions;
+using VendingMachine.Domain.Exceptions;
 
 namespace VendingMachine.Core.Test
 {
     public class WalletTest
     {
-        BaseWallet _walletService;
+        TestWallet _walletService;
 
         [SetUp]
         public void Setup()
         {
-            _walletService = new BaseWallet();
+            _walletService = new TestWallet();
         }
 
         [Test]
@@ -104,7 +105,7 @@ namespace VendingMachine.Core.Test
 
             _walletService.RetrieveCoinsFor(VALUE);
 
-            Assert.AreEqual(expected: 0, _walletService.GetCoins().Count);
+            Assert.AreEqual(expected: 0, _walletService.Coins.Count);
         }
 
         [Test]

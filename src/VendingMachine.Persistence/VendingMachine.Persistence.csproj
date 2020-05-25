@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VendingMachine.Core\VendingMachine.Core.csproj" />
+    <ProjectReference Include="..\VendingMachine.Application\VendingMachine.Application.csproj" />
     <ProjectReference Include="..\VendingMachine.Domain\VendingMachine.Domain.csproj" />
   </ItemGroup>
 
