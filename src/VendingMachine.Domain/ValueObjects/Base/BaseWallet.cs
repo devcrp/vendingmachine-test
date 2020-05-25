@@ -8,6 +8,9 @@ using VendingMachine.Domain.ValueObjects.Options;
 
 namespace VendingMachine.Domain.ValueObjects.Base
 {
+    /// <summary>
+    /// Base wallet object to contain all the shared logic between wallets.
+    /// </summary>
     public class BaseWallet
     {
         private static decimal[] VALID_COINS = new decimal[] { 2, 1, 0.5m, 0.2m, 0.1m, 0.05m };

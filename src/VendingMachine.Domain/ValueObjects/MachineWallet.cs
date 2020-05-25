@@ -7,6 +7,9 @@ using VendingMachine.Domain.ValueObjects.Options;
 
 namespace VendingMachine.Domain.ValueObjects
 {
+    /// <summary>
+    /// This class represents the wallet for the vending machine.
+    /// </summary>
     public class MachineWallet : BaseWallet, IWallet
     {
         public MachineWallet Options(Action<WalletDefaultOptions> action)

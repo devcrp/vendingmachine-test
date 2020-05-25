@@ -5,6 +5,9 @@ using VendingMachine.Domain.ValueObjects.Interfaces;
 
 namespace VendingMachine.Core.Base
 {
+    /// <summary>
+    /// Base wallet service with all the common logic to contact with the domain.
+    /// </summary>
     public class BaseWalletService
     {
         private readonly IWallet _wallet;

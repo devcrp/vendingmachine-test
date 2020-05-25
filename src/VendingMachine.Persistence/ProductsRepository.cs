@@ -7,6 +7,9 @@ using VendingMachine.Domain.Entities;
 
 namespace VendingMachine.Persistence
 {
+    /// <summary>
+    /// Implementation for the static products repository.
+    /// </summary>
     public class ProductsRepository : IProductsRepository
     {
         static List<Product> _products = new List<Product>();

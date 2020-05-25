@@ -6,6 +6,9 @@ using VendingMachine.Domain.ValueObjects.Interfaces;
 
 namespace VendingMachine.Domain.ValueObjects
 {
+    /// <summary>
+    /// This class represents the wallet for the user.
+    /// </summary>
     public class UserWallet : BaseWallet, IWallet
     {
 

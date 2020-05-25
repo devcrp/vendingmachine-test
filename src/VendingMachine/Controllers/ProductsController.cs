@@ -24,7 +24,7 @@ namespace VendingMachine.Controllers
         /// <summary>
         /// Gets a list of all the stock products.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of products</returns>
         // GET: api/Products
         [HttpGet]
         public IEnumerable<Product> Get()
@@ -36,7 +36,7 @@ namespace VendingMachine.Controllers
         /// Takes on unit of a given product. I also validates if the product is available and if the user amount is enough.
         /// </summary>
         /// <param name="id">Id of the product</param>
-        /// <returns></returns>
+        /// <returns>List of coins for change</returns>
         // POST: api/Products/1 [body: 1,80]
         [HttpPost("take/{id}")]
         public ActionResult<List<decimal>> Take(int id)

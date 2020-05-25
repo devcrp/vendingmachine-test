@@ -4,7 +4,7 @@ using VendingMachine.Domain.ValueObjects;
 namespace VendingMachine.Core
 {
     /// <summary>
-    /// Class to hold the instance for the user's wallet. This instance will NOT have a default initial list of coins.
+    /// This class represents the wallet service for the user.
     /// </summary>
     public class UserWalletService : BaseWalletService
     {

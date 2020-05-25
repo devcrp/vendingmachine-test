@@ -12,7 +12,7 @@ namespace VendingMachine.Extensions
     public static class AddServiceExtensions
     {
         /// <summary>
-        /// Adds the Singleton needed services that hold the data.
+        /// Adds the Singleton needed services.
         /// </summary>
         /// <param name="services"></param>
         public static void AddSingletonServices(this IServiceCollection services)

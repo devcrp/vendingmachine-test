@@ -20,6 +20,11 @@ namespace VendingMachine.Domain.Entities
 
         public int Quantity { get; private set; }
 
+        /// <summary>
+        /// It takes one unit of the product, it also validates that the product can be bought with the specified amount so that the model remains valid.
+        /// </summary>
+        /// <param name="amount">Amount the products wants to be taken with.</param>
+        /// <returns></returns>
         public decimal TakeOne(decimal amount)
         {
             if (this.Quantity <= 0)
