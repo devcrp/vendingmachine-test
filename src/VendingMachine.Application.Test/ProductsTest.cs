@@ -1,26 +1,31 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using VendingMachine.Core.Options;
-using VendingMachine.Core.Exceptions;
-using VendingMachine.Domain.Models;
+using VendingMachine.Domain.Entities;
+using VendingMachine.Application.Test.Repositories;
+using VendingMachine.Application.Test.ValueObjects;
+using VendingMachine.Domain.ValueObjects;
+using VendingMachine.Domain.Exceptions;
 
 namespace VendingMachine.Core.Test
 {
     public class ProductsTest
     {
         ProductsService _productsService;
+        UserWallet _userWallet;
+        MachineWallet _machineWallet;
 
         [SetUp]
         public void Setup()
         {
-
+            _userWallet = new UserWallet();
+            _machineWallet = new MachineWallet();
         }
 
-        private ProductsService GetService(List<Product> products) => new ProductsService(new ProductDefaultOptions
+        private ProductsService GetService(List<Product> products)
         {
-            Products = products
-        }, new UserWalletService());
+            return new ProductsService(new ProductsTestRepository().Seed(products), _userWallet, _machineWallet);
+        }
 
         [Test]
         public void GetList_ReturnsSameCount()
@@ -41,12 +46,15 @@ namespace VendingMachine.Core.Test
         public void TakeProduct_SubstractsQuantity()
         {
             const int INITIAL_QUANTITY = 10;
-            const decimal PRICE = 1.30M;
+
+            _userWallet.AddCoin(1);
+            _userWallet.AddCoin(0.20m);
+            _userWallet.AddCoin(0.10m);
             var products = new List<Product>();
-            products.Add(new Product(1, "Tea", PRICE, INITIAL_QUANTITY));
+            products.Add(new Product(1, "Tea", 1.30m, INITIAL_QUANTITY));
 
             _productsService = GetService(products);
-            _productsService.Take(1, PRICE);
+            _productsService.Take(1);
 
             Assert.AreEqual(expected: INITIAL_QUANTITY - 1, products.First().Quantity);
         }
@@ -54,14 +62,16 @@ namespace VendingMachine.Core.Test
         [Test]
         public void TakeProduct_NotAvailableBecauseOfQuantity()
         {
-            const decimal PRICE = 1.30M;
+            _userWallet.AddCoin(1);
+            _userWallet.AddCoin(0.20m);
+            _userWallet.AddCoin(0.10m);
             var products = new List<Product>();
-            products.Add(new Product(1, "Tea", PRICE, 0));
+            products.Add(new Product(1, "Tea", 1.30m, 0));
 
             _productsService = GetService(products);
             try
             {
-                _productsService.Take(1, PRICE);
+                _productsService.Take(1);
                 Assert.Fail($"It was expected for the product to do not be available.");
             }
             catch (ProductNotAllowedException)
@@ -73,14 +83,14 @@ namespace VendingMachine.Core.Test
         [Test]
         public void TakeProduct_NotAvailableBecauseOfPrice()
         {
-            const decimal PRICE = 1.30M;
+            _userWallet.AddCoin(1);
             var products = new List<Product>();
-            products.Add(new Product(1, "Tea", PRICE, 0));
+            products.Add(new Product(1, "Tea", 1.30m, 0));
 
             _productsService = GetService(products);
             try
             {
-                _productsService.Take(1, PRICE / 2);
+                _productsService.Take(1);
                 Assert.Fail($"It was expected for the product to do not be available.");
             }
             catch (ProductNotAllowedException)

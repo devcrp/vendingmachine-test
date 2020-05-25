@@ -17,7 +17,7 @@ namespace VendingMachine.Controllers
         /// <summary>
         /// Gets the current amount in the user's wallet.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Current amount in user's wallet</returns>
         // GET: api/Wallet
         [HttpGet]
         public ActionResult<decimal> Get()
@@ -28,8 +28,8 @@ namespace VendingMachine.Controllers
         /// <summary>
         /// Adds a coin of the given value to the user's wallet.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Value of the coin to be added</param>
+        /// <returns>Amount of the user's wallet after adding the coin.</returns>
         // POST: api/Wallet
         [HttpPost]
         public ActionResult<decimal> Post([FromBody] decimal value)
@@ -40,7 +40,7 @@ namespace VendingMachine.Controllers
         /// <summary>
         /// Removes and returns all the coins in the user's wallet.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Amount of the user's wallet after deleting the coins.</returns>
         // DELETE: api/Wallet
         [HttpDelete]
         public ActionResult<decimal> Delete()

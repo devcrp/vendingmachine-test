@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VendingMachine.Core.Options
+namespace VendingMachine.Domain.ValueObjects.Options
 {
     public class WalletDefaultOptions
     {

@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VendingMachine.Core.Options;
-using VendingMachine.Core.Exceptions;
-using VendingMachine.Domain.Interfaces;
+using System.Text;
+using VendingMachine.Domain.Exceptions;
+using VendingMachine.Domain.ValueObjects.Interfaces;
+using VendingMachine.Domain.ValueObjects.Options;
 
-namespace VendingMachine.Core.Base
+namespace VendingMachine.Domain.ValueObjects.Base
 {
-    public class BaseWallet : IWalletService
+    /// <summary>
+    /// Base wallet object to contain all the shared logic between wallets.
+    /// </summary>
+    public class BaseWallet
     {
         private static decimal[] VALID_COINS = new decimal[] { 2, 1, 0.5m, 0.2m, 0.1m, 0.05m };
-        private List<decimal> _coins;
-
-        public BaseWallet(WalletDefaultOptions options = null)
-        {
-            if (options != null && options.Coins != null) _coins = options.Coins;
-            else _coins = new List<decimal>();
-        }
+        public List<decimal> Coins { get; protected set; } = new List<decimal>();
 
         /// <summary>
         /// Adds a coin of the given value into the current wallet.
@@ -28,7 +26,7 @@ namespace VendingMachine.Core.Base
             if (!IsValid(coin))
                 throw new InvalidCoinException(coin);
 
-            _coins.Add(coin);
+            Coins.Add(coin);
             return GetAmount();
         }
 
@@ -39,7 +37,7 @@ namespace VendingMachine.Core.Base
         /// <returns></returns>
         public decimal RemoveCoin(decimal coin)
         {
-            RemoveCoin(_coins, coin);
+            RemoveCoin(Coins, coin);
             return GetAmount();
         }
 
@@ -47,7 +45,7 @@ namespace VendingMachine.Core.Base
         /// Gets the current amount in the wallet.
         /// </summary>
         /// <returns></returns>
-        public decimal GetAmount() => _coins.Sum(coin => coin);
+        public decimal GetAmount() => Coins.Sum(coin => coin);
 
         /// <summary>
         /// Empties the wallet.
@@ -55,15 +53,9 @@ namespace VendingMachine.Core.Base
         /// <returns></returns>
         public decimal RemoveAllCoins()
         {
-            _coins.Clear();
+            Coins.Clear();
             return 0;
         }
-
-        /// <summary>
-        /// Gets the collection of coins contained in the wallet.
-        /// </summary>
-        /// <returns></returns>
-        public List<decimal> GetCoins() => _coins;
 
         /// <summary>
         /// For the given value, returns the minimum amount of coins available from the wallet and removes them from it.
@@ -102,7 +94,7 @@ namespace VendingMachine.Core.Base
             if (coins.Sum() != value)
                 throw new NoChangeException();
 
-            _coins = currentCoinsCopy;
+            Coins = currentCoinsCopy;
 
             return coins;
         }
@@ -121,7 +113,7 @@ namespace VendingMachine.Core.Base
         private List<decimal> CloneCoinsList()
         {
             List<decimal> copy = new List<decimal>();
-            copy.AddRange(_coins);
+            copy.AddRange(Coins);
             return copy;
         }
 
